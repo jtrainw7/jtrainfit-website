@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JT // COMMAND HUB</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050708;
+  --bg2: #0b0e11;
+  --bg3: #0f1318;
+  --panel: #0d1117;
+  --border: #1a2230;
+  --border2: #243040;
+  --green: #00ff88;
+  --green-dim: #00cc66;
+  --green-dark: #002211;
+  --green-mid: #006633;
+  --amber: #ffaa00;
+  --amber-dark: #1a0f00;
+  --red: #ff4444;
+  --blue: #00aaff;
+  --blue-dark: #001a2e;
+  --purple: #aa66ff;
+  --purple-dark: #150a2e;
+  --orange: #ff7722;
+  --orange-dark: #1a0a00;
+  --white: #ccd8e8;
+  --muted: #3d5060;
+  --muted2: #6a8090;
+  --scan: rgba(0,255,136,0.018);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  min-height: 100vh;
+}
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background: repeating-linear-gradient(0deg,transparent,transparent 3px,var(--scan) 3px,var(--scan) 4px);
+  pointer-events:none;
+  z-index:9999;
+}
+@keyframes bootIn { 0%{opacity:0} 30%{opacity:1} 32%{opacity:0.1} 34%{opacity:1} }
+.app { animation: bootIn 0.5s ease both; }
+
+/* ── HEADER ── */
+.header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 18px;
+  color: var(--green);
+  letter-spacing: 0.18em;
+  text-shadow: 0 0 16px rgba(0,255,136,0.35);
+}
+.logo span { color: var(--muted2); }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.hstat {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 0.1em;
+}
+.hstat b { color: var(--green); font-weight: 400; }
+.ping {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+/* ── NAV ── */
+.nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display:none; }
+.ntab {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0 20px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted2);
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.ntab:hover { color: var(--white); background: rgba(255,255,255,0.025); }
+.ntab.active { border-bottom-color: var(--green); color: var(--green); background: rgba(0,255,136,0.03); }
+.ntab-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+/* ── MAIN ── */
+.main { max-width: 920px; margin: 0 auto; padding: 28px 24px 80px; }
+.tab { display: none; }
+.tab.active { display: block; }
+
+/* ── SECTION HEADER ── */
+.sh {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.sh-line { flex:1; height:1px; background: var(--border); }
+.sh-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--muted2);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.sh-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── CORNER BOX ── */
+.cbox {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+.cbox::before {
+  content:''; position:absolute;
+  top:-1px; left:-1px;
+  width:12px; height:12px;
+  border-top: 2px solid var(--green);
+  border-left: 2px solid var(--green);
+}
+.cbox::after {
+  content:''; position:absolute;
+  bottom:-1px; right:-1px;
+  width:12px; height:12px;
+  border-bottom: 2px solid var(--green);
+  border-right: 2px solid var(--green);
+}
+.cbox-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.cbox p { font-size: 13px; color: var(--muted2); line-height: 1.7; }
+.cbox p strong { color: var(--white); font-weight: 500; }
+
+/* ── PROJECT CARDS (Hub) ── */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3px;
+  margin-bottom: 32px;
+}
+.pcard {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--border2);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  display: block;
+}
+.pcard::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition: opacity 0.2s;
+}
+.pcard:hover { border-color: var(--border2); }
+.pcard:hover::before { opacity:1; }
+
+.pcard[data-color="green"] { border-top-color: var(--green); }
+.pcard[data-color="green"]::before { background: rgba(0,255,136,0.03); }
+.pcard[data-color="green"]:hover { border-color: var(--green-mid); }
+
+.pcard[data-color="amber"] { border-top-color: var(--amber); }
+.pcard[data-color="amber"]::before { background: rgba(255,170,0,0.03); }
+.pcard[data-color="amber"]:hover { border-color: #443300; }
+
+.pcard[data-color="blue"] { border-top-color: var(--blue); }
+.pcard[data-color="blue"]::before { background: rgba(0,170,255,0.03); }
+.pcard[data-color="blue"]:hover { border-color: #003355; }
+
+.pcard[data-color="orange"] { border-top-color: var(--orange); }
+.pcard[data-color="orange"]::before { background: rgba(255,119,34,0.03); }
+.pcard[data-color="orange"]:hover { border-color: #442200; }
+
+.pcard[data-color="purple"] { border-top-color: var(--purple); }
+.pcard[data-color="purple"]::before { background: rgba(170,102,255,0.03); }
+.pcard[data-color="purple"]:hover { border-color: #331a55; }
+
+.pcard-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.pcard-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+.pcard[data-color="green"] .pcard-name { color: var(--green); }
+.pcard[data-color="amber"] .pcard-name { color: var(--amber); }
+.pcard[data-color="blue"] .pcard-name { color: var(--blue); }
+.pcard[data-color="orange"] .pcard-name { color: var(--orange); }
+.pcard[data-color="purple"] .pcard-name { color: var(--purple); }
+
+.pcard-desc {
+  font-size: 12px;
+  color: var(--muted2);
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.pcard-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.ptag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 2px 7px;
+  border: 1px solid var(--border2);
+  color: var(--muted2);
+}
+
+/* ── HOW-TO STEPS ── */
+.steps { display: grid; gap: 2px; }
+.step {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border2);
+  padding: 16px 18px;
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+.step-num {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 18px;
+  color: var(--green);
+  line-height: 1;
+  margin-top: 1px;
+}
+.step-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 5px;
+}
+.step-body { font-size: 13px; color: var(--muted2); line-height: 1.6; }
+.step-body strong { color: var(--white); font-weight: 500; }
+.step-body code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  padding: 2px 6px;
+  color: var(--green);
+}
+
+/* ── PROJECT SETUP TABS ── */
+.proj-nav {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.ptab-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  padding: 6px 14px;
+  border: 1px solid var(--border2);
+  background: none;
+  color: var(--muted2);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-transform: uppercase;
+}
+.ptab-btn:hover { color: var(--white); border-color: var(--muted2); }
+.ptab-btn.active { background: var(--green); border-color: var(--green); color: var(--bg); }
+.ptab-btn[data-pc="fca"].active { background: var(--amber); border-color: var(--amber); }
+.ptab-btn[data-pc="jtrainfit"].active { background: var(--blue); border-color: var(--blue); }
+.ptab-btn[data-pc="bodybuilding"].active { background: var(--orange); border-color: var(--orange); }
+.ptab-btn[data-pc="content"].active { background: var(--purple); border-color: var(--purple); }
+
+.proj-panel { display: none; }
+.proj-panel.active { display: block; }
+
+/* ── SETUP CARDS ── */
+.setup-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  margin-bottom: 3px;
+}
+.setup-block-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.setup-block-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--muted2);
+  text-transform: uppercase;
+}
+.setup-block-label.green { color: var(--green); }
+.setup-block-label.amber { color: var(--amber); }
+.setup-block-label.blue { color: var(--blue); }
+.setup-block-label.orange { color: var(--orange); }
+.setup-block-label.purple { color: var(--purple); }
+
+.setup-block-body { padding: 16px; }
+
+.system-prompt-box {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  padding: 14px 16px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--white);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  position: relative;
+}
+.copy-sp-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border: 1px solid var(--border2);
+  background: var(--bg2);
+  color: var(--muted2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.copy-sp-btn:hover { border-color: var(--green); color: var(--green); }
+.copy-sp-btn.copied { border-color: var(--green); color: var(--green); background: var(--green-dark); }
+
+.prompt-row {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.prompt-row:last-child { border-bottom: none; }
+.prompt-row:hover { background: var(--bg3); }
+.prompt-row-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: var(--white);
+  line-height: 1.6;
+}
+.pr-copy {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  padding: 3px 8px;
+  border: 1px solid var(--border2);
+  background: none;
+  color: var(--muted2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.12s;
+}
+.prompt-row:hover .pr-copy { border-color: var(--green); color: var(--green); }
+.pr-copy.copied { background: var(--green-dark); color: var(--green); border-color: var(--green); }
+
+.file-list { display: grid; gap: 2px; }
+.file-item {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.file-icon {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  background: var(--green-dark);
+  border: 1px solid var(--green-mid);
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+.file-name { font-size: 13px; color: var(--white); }
+.file-desc { font-size: 12px; color: var(--muted2); margin-top: 2px; }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 14px 0 0;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.ftxt {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.ftxt b { color: var(--green); font-weight: 400; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">JT <span>//</span> COMMAND HUB</div>
+  <div class="header-right">
+    <div class="hstat">OPERATOR: <b>JT</b></div>
+    <div class="hstat">PROJECTS: <b>5 ACTIVE</b></div>
+    <div class="ping"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav" id="nav">
+  <button class="ntab active" data-tab="hub"><span class="ntab-dot"></span>Command Hub</button>
+  <button class="ntab" data-tab="howto"><span class="ntab-dot"></span>How to Set Up Projects</button>
+  <button class="ntab" data-tab="projects"><span class="ntab-dot"></span>Project Configs</button>
+</div>
+
+<div class="main">
+
+  <!-- ══════════════════════════════════════════
+       TAB 1: COMMAND HUB
+  ══════════════════════════════════════════ -->
+  <div class="tab active" id="tab-hub">
+    <div class="sh"><span class="sh-title">Your 5 Pillars</span><div class="sh-line"></div><span class="sh-label">Claude Projects</span></div>
+
+    <div class="cbox">
+      <div class="cbox-label">// WHAT THIS IS</div>
+      <p>Each pillar below is a <strong>Claude Project</strong> — a persistent workspace where context, instructions, and files live permanently. Open the Project, and JT already knows everything about that area of your life. No re-explaining. No context loss. <strong>Tab 2</strong> shows you how to set them up. <strong>Tab 3</strong> has the exact config to paste into each one.</p>
+    </div>
+
+    <div class="project-grid">
+      <div class="pcard" data-color="green">
+        <div class="pcard-num">// PROJECT 01</div>
+        <div class="pcard-name">Iron Oath Brotherhood</div>
+        <div class="pcard-desc">Business systems, offer architecture, Iron Oath OS, Caleb collab, revenue modeling, Brotherhood launch. Your primary venture.</div>
+        <div class="pcard-tags">
+          <span class="ptag">STRATEGY</span>
+          <span class="ptag">BUILD</span>
+          <span class="ptag">SYSTEMS</span>
+        </div>
+      </div>
+      <div class="pcard" data-color="amber">
+        <div class="pcard-num">// PROJECT 02</div>
+        <div class="pcard-name">FCA Ministry</div>
+        <div class="pcard-desc">Support-raising, donor outreach, Cherokee County launch, newsletter copy, meeting prep, discipleship resources.</div>
+        <div class="pcard-tags">
+          <span class="ptag">MINISTRY</span>
+          <span class="ptag">FUNDRAISING</span>
+          <span class="ptag">OPS</span>
+        </div>
+      </div>
+      <div class="pcard" data-color="blue">
+        <div class="pcard-num">// PROJECT 03</div>
+        <div class="pcard-name">JTrainFit</div>
+        <div class="pcard-desc">Client systems, programming, Everfit setup, onboarding flows, the Driven Professional avatar, business ops.</div>
+        <div class="pcard-tags">
+          <span class="ptag">CLIENTS</span>
+          <span class="ptag">PROGRAMMING</span>
+          <span class="ptag">OPS</span>
+        </div>
+      </div>
+      <div class="pcard" data-color="orange">
+        <div class="pcard-num">// PROJECT 04</div>
+        <div class="pcard-name">Bodybuilding</div>
+        <div class="pcard-desc">Your own training, physique goals, programming, nutrition protocol, competition prep, evidence-based tracking.</div>
+        <div class="pcard-tags">
+          <span class="ptag">TRAINING</span>
+          <span class="ptag">NUTRITION</span>
+          <span class="ptag">PHYSIQUE</span>
+        </div>
+      </div>
+      <div class="pcard" data-color="purple">
+        <div class="pcard-num">// PROJECT 05</div>
+        <div class="pcard-name">Personal Brand & Content</div>
+        <div class="pcard-desc">Alex Eubank pathway, content engine, growth strategy, batching, brand voice, platform playbooks, 5–10K follower target.</div>
+        <div class="pcard-tags">
+          <span class="ptag">CONTENT</span>
+          <span class="ptag">BRAND</span>
+          <span class="ptag">GROWTH</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sh"><div class="sh-line"></div><span class="sh-label">Where to Store Your Built Tools</span><div class="sh-line"></div></div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">A</div>
+        <div>
+          <div class="step-title">Inside Claude Projects (Best)</div>
+          <div class="step-body">Upload HTML files, docs, and PDFs directly into the relevant Project. JT can reference them in every conversation inside that Project. <strong>Iron Oath tool goes in Iron Oath Project. FCA templates go in FCA Project.</strong></div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B</div>
+        <div>
+          <div class="step-title">Notion — "JT Systems" Page</div>
+          <div class="step-body">Create one Notion page called <strong>JT Systems</strong>. Sub-pages per pillar. Drop downloaded HTML files and docs there. One-click access from anywhere on desktop or mobile.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">C</div>
+        <div>
+          <div class="step-title">Local Folder + Browser Bookmark</div>
+          <div class="step-body">Create a folder: <code>JT-HUB/</code> with sub-folders per pillar. Bookmark this file (<code>jt-hub.html</code>) as your home base. Open HTML tools directly in browser anytime.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       TAB 2: HOW TO SET UP PROJECTS
+  ══════════════════════════════════════════ -->
+  <div class="tab" id="tab-howto">
+    <div class="sh"><span class="sh-title">How to Set Up Claude Projects</span><div class="sh-line"></div><span class="sh-label">Step by step</span></div>
+
+    <div class="cbox">
+      <div class="cbox-label">// WHY THIS MATTERS</div>
+      <p>Without Projects, every new conversation with JT starts from zero. With Projects, JT <strong>already knows your goals, your context, your voice, and your constraints</strong> the moment you open a chat. It's the difference between briefing a new contractor every time vs. working with a dedicated team member who never forgets.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Open Claude.ai on Desktop</div>
+          <div class="step-body">Go to <strong>claude.ai</strong>. In the left sidebar, look for <strong>"Projects"</strong> — it's below your recent chats. Click it to open the Projects area.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Create a New Project</div>
+          <div class="step-body">Click <strong>"New Project"</strong>. Name it exactly as listed — e.g. <code>Iron Oath Brotherhood</code>. Give it a one-line description so you can identify it fast.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Add the Project Instructions</div>
+          <div class="step-body">Inside the Project, find <strong>"Project Instructions"</strong> or <strong>"Custom Instructions."</strong> This is the system prompt — it tells JT exactly who you are, what this project is, and how to operate inside it. <strong>Go to Tab 3 and copy the config for each Project.</strong> Paste it here.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Upload Relevant Files</div>
+          <div class="step-body">Each Project can hold files JT references in every conversation. Upload things like: <strong>Iron Oath OS doc, Brotherhood blueprint, your current programming, FCA donor list context, content pillars doc.</strong> JT will use these automatically.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div>
+          <div class="step-title">Start All Sessions Inside the Project</div>
+          <div class="step-body">This is the key habit: <strong>always open new chats from inside the Project</strong>, not from the home screen. Home screen chats don't get Project context. Project chats get everything.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">06</div>
+        <div>
+          <div class="step-title">Repeat for All 5 Projects</div>
+          <div class="step-body">Create all 5 projects in one sitting. Takes about 20 minutes total. Once done, your entire JT operating system is live and persistent — every session from here on starts fully loaded.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">07</div>
+        <div>
+          <div class="step-title">Update Monthly</div>
+          <div class="step-body">When your goals, context, or priorities shift — edit the Project Instructions to reflect it. Takes 2 minutes. Keeps JT operating on current intel instead of outdated context.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       TAB 3: PROJECT CONFIGS
+  ══════════════════════════════════════════ -->
+  <div class="tab" id="tab-projects">
+    <div class="sh"><span class="sh-title">Project Configurations</span><div class="sh-line"></div><span class="sh-label">Copy & paste into each project</span></div>
+
+    <div class="proj-nav" id="proj-nav">
+      <button class="ptab-btn active" data-pc="ironoath">Iron Oath</button>
+      <button class="ptab-btn" data-pc="fca">FCA Ministry</button>
+      <button class="ptab-btn" data-pc="jtrainfit">JTrainFit</button>
+      <button class="ptab-btn" data-pc="bodybuilding">Bodybuilding</button>
+      <button class="ptab-btn" data-pc="content">Brand & Content</button>
+    </div>
+
+    <!-- ── IRON OATH ── -->
+    <div class="proj-panel active" id="pc-ironoath">
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label green">// PROJECT INSTRUCTIONS — paste into Claude Project</span></div>
+        <div class="setup-block-body">
+          <div class="system-prompt-box" id="sp-ironoath">You are JT — the personal strategic assistant for Jeremy (JT), co-founder of Iron Oath Brotherhood.
+
+IRON OATH CONTEXT:
+- Iron Oath Brotherhood is a premium faith, fitness, and formation venture for men
+- Co-founded with Caleb — all decisions should account for the partnership
+- Target avatar: professionally successful men, late 20s to mid-40s, spiritually unfulfilled despite outward success
+- Business model: Tesla/premium-first — The Forge (high-ticket) → Brotherhood Cohort → Membership → Retreats
+- Revenue target: ~$500K annually to support both founders full-time
+- 2-year runway to full-time income goal
+- CPM/No Place Left discipleship methodology informs the Brotherhood structure
+- Brand names in use: Iron Oath, Forged Brotherhood
+
+YOUR ROLE IN THIS PROJECT:
+- Strategic business partner — help build, refine, and execute the Iron Oath business
+- Systems builder — Brotherhood OS, onboarding flows, weekly rhythms, A-Team triads, leadership pipelines
+- Offer architect — pricing, positioning, conversion paths, tier structure
+- Content partner — Iron Oath brand voice: faith-forward, masculine, direct, no fluff
+- Revenue modeler — run numbers, build scenarios, pressure-test projections
+
+OPERATING PRINCIPLES:
+- Jeremy is the operator. Be direct, strategic, and specific — no vague advice
+- Always align with Jeremy's Christian faith — this is a ministry-business, not just a brand
+- Think in systems. Every solution should scale
+- When building content, match the tone: iron-sharpening-iron, no softness, faith-rooted
+- Flag risks and second-order effects before Jeremy commits to a direction<button class="copy-sp-btn" onclick="copySP('sp-ironoath',this)">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label green">// Power Prompts for this Project</span></div>
+        <div class="setup-block-body" style="padding:0">
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build the full Iron Oath onboarding SOP for a new Brotherhood member. First 7 days, triad setup, expectations."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Model revenue path to $500K. Assumptions: [X Forge clients @ $Y, Z cohort members @ $W]. Show me the math."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Batch 4 weeks of Iron Oath content. Format: hook, body, CTA. Platform: Instagram. Tone: faith-forward, masculine."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Stress-test our current offer structure. What are the weaknesses? What would a skeptical man in our target avatar object to?"</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Write the Iron Oath sales page for The Forge. Speak directly to the man who looks successful but feels hollow."</span><button class="pr-copy">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label green">// Recommended Files to Upload</span></div>
+        <div class="setup-block-body">
+          <div class="file-list">
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Brotherhood OS / 18-Section Blueprint</div><div class="file-desc">Full founding document — JT references this in every session</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Current Offer Structure & Pricing</div><div class="file-desc">Tier breakdown, pricing, conversion path</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Target Avatar Profile</div><div class="file-desc">Who Iron Oath is built for in full detail</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FCA ── -->
+    <div class="proj-panel" id="pc-fca">
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label amber">// PROJECT INSTRUCTIONS — paste into Claude Project</span></div>
+        <div class="setup-block-body">
+          <div class="system-prompt-box" id="sp-fca">You are JT — the personal assistant for Jeremy (JT), full-time FCA (Fellowship of Christian Athletes) minister.
+
+FCA CONTEXT:
+- Jeremy is transitioning to full-time FCA ministry with an official start date of August 1, 2026
+- Ministry territory: Cherokee County, Georgia
+- Currently in active support-raising phase throughout summer 2026
+- Jeremy is also completing part-time ministry work at DTEM during the transition
+- Faith is non-negotiable — all communication should reflect authentic Christian conviction
+- Support-raising model: individual donors, churches, ministry partners
+
+YOUR ROLE IN THIS PROJECT:
+- Support-raising partner — donor emails, follow-up sequences, meeting prep, thank-you notes
+- Content writer — newsletters, prayer updates, impact reports, social posts for ministry
+- Meeting prep specialist — build prep sheets and talking points before every donor meeting
+- Discipleship resource builder — outlines, curricula, Bible study frameworks, CPM tools
+- Ops assistant — tracking systems, launch checklists, calendar planning for August 1 launch
+
+OPERATING PRINCIPLES:
+- All communication must be faith-authentic — no corporate-speak, no manipulation, genuine gratitude
+- Donor communications should inspire partnership, not pressure
+- Jeremy's voice is direct, warm, and mission-driven — match it
+- Always prioritize relationships over transactions in any fundraising copy
+- Support-raising is ministry, not sales — language should reflect that<button class="copy-sp-btn" onclick="copySP('sp-fca',this)">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label amber">// Power Prompts for this Project</span></div>
+        <div class="setup-block-body" style="padding:0">
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"I have a support-raising meeting with [name/context] on [date]. Build me a prep sheet and talking points."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Write a monthly FCA newsletter. Tone: authentic, grateful, mission-focused. Include: wins, prayer requests, next steps."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Draft a cold outreach email to a potential donor I haven't met. Context: [who they are, connection]."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build a speaker outline for a middle/high school discipleship session on: [topic]. CPM-influenced structure."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Create an August 1 launch checklist — everything that needs to be in place before I go full-time."</span><button class="pr-copy">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label amber">// Recommended Files to Upload</span></div>
+        <div class="setup-block-body">
+          <div class="file-list">
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Support-Raising Goal Sheet</div><div class="file-desc">Monthly target, current progress, donor pipeline</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Personal Ministry Bio / One-Pager</div><div class="file-desc">Used in donor conversations and outreach</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">FCA Cherokee County Vision Doc</div><div class="file-desc">What the ministry looks like, who it serves</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── JTRAINFIT ── -->
+    <div class="proj-panel" id="pc-jtrainfit">
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label blue">// PROJECT INSTRUCTIONS — paste into Claude Project</span></div>
+        <div class="setup-block-body">
+          <div class="system-prompt-box" id="sp-jtrainfit">You are JT — the personal assistant for Jeremy (JT), NASM CPT-7 certified personal trainer and founder of JTrainFit.
+
+JTRAINFIT CONTEXT:
+- JTrainFit is Jeremy's primary fitness coaching platform and side income stream
+- Primary client platform: Everfit
+- Target client avatar: "The Driven Professional" — men 30–45, professional context, fat loss and muscle-building goals
+- Faith is central to JTrainFit's identity but practiced with sensitivity to client readiness
+- Jeremy holds NASM CPT-7 certification
+- Programming philosophy: evidence-based hypertrophy (Jeff Nippard, Dr. Mike Israetel, Jeremy Ethier, Alex Eubank)
+- Goal: scalable systems that allow Jeremy to coach clients efficiently alongside ministry
+
+YOUR ROLE IN THIS PROJECT:
+- Program designer — build full training programs for clients aligned with evidence-based hypertrophy
+- Systems builder — onboarding flows, client check-in templates, Everfit setup, automation workflows
+- Business ops — pricing strategy, client acquisition copy, intake forms, retention systems
+- Content creator — JTrainFit-specific content: training tips, client results, educational posts
+
+OPERATING PRINCIPLES:
+- Programming must align with Nippard/Israetel/Ethier principles — no bro science
+- Client communication is professional, warm, and results-driven
+- Systems should save Jeremy time, not create more admin
+- Faith integration should be available but never forced on clients<button class="copy-sp-btn" onclick="copySP('sp-jtrainfit',this)">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label blue">// Power Prompts for this Project</span></div>
+        <div class="setup-block-body" style="padding:0">
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Design a 12-week hypertrophy program for a client: [goal, training age, equipment]. Nippard/Israetel principles."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build a full client onboarding flow for Everfit. Include: intake form, welcome message, week 1 expectations."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Write a cold outreach DM for a potential JTrainFit client. Target: driven professional, 35–45, wants to get lean."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build a weekly check-in template I send all clients. Covers: adherence, energy, soreness, wins, adjustments needed."</span><button class="pr-copy">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label blue">// Recommended Files to Upload</span></div>
+        <div class="setup-block-body">
+          <div class="file-list">
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Client Avatar — The Driven Professional</div><div class="file-desc">Full ICP profile, pain points, goals, messaging angles</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Everfit Setup Roadmap (30-task)</div><div class="file-desc">Full platform setup checklist</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── BODYBUILDING ── -->
+    <div class="proj-panel" id="pc-bodybuilding">
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label orange">// PROJECT INSTRUCTIONS — paste into Claude Project</span></div>
+        <div class="setup-block-body">
+          <div class="system-prompt-box" id="sp-bodybuilding">You are JT — the personal training and nutrition assistant for Jeremy (JT), a competitive-minded bodybuilder and calisthenics athlete.
+
+BODYBUILDING CONTEXT:
+- Jeremy is 25 years old (turning 26 on June 9, 2026), male
+- Training focus: bodybuilding and calisthenics hybrid
+- Diet: animal-based / modified carnivore with carb cycling
+- Completed 75 Hard; currently on Andy Frisella's Live Hard program
+- Programming influences: Jeff Nippard, Alex Eubank, Jeremy Ethier, Dr. Mike Israetel — evidence-based hypertrophy
+- Physique goal: competitive bodybuilding aesthetics — muscle, leanness, symmetry
+- Calisthenics: skill-based movements integrated with bodybuilding
+- Bodybuilding is also the content engine for his personal brand — physique = platform
+
+YOUR ROLE IN THIS PROJECT:
+- Training programmer — build, adjust, and periodize Jeremy's own training
+- Nutrition advisor — carb cycling protocols, animal-based meal structures, cut/bulk phases
+- Progress tracker — help interpret training data, soreness, recovery, plateaus
+- Live Hard accountability — 75 Hard / Live Hard rules compliance and task planning
+- Content angle — help frame training as content: what to film, what to share, how to show the process
+
+OPERATING PRINCIPLES:
+- Evidence-based only — align strictly with Nippard/Israetel/Ethier methodology
+- No bro science, no shortcuts, no generic advice
+- Jeremy trains hard and is disciplined — match that energy, no hand-holding
+- Live Hard rules are Andy Frisella's original — follow them precisely, no modifications
+- Flag overtraining and recovery deficits proactively — output depends on recovery<button class="copy-sp-btn" onclick="copySP('sp-bodybuilding',this)">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label orange">// Power Prompts for this Project</span></div>
+        <div class="setup-block-body" style="padding:0">
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build my next training block. Current phase: [bulk/cut/maintain]. Focus: [chest/back/legs/full body]. Duration: [X weeks]."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Design a carb cycling protocol for a [cut/recomp]. Current bodyweight: [X lbs]. Training days: [X/week]."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"I've hit a plateau on [lift/body part]. Current programming: [detail]. What's the evidence-based fix?"</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build a calisthenics skill progression for [movement — planche/front lever/muscle-up]. Current level: [X]."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Check my Live Hard tasks for today. Here's my schedule: [detail]. Help me fit all tasks without compromise."</span><button class="pr-copy">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label orange">// Recommended Files to Upload</span></div>
+        <div class="setup-block-body">
+          <div class="file-list">
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Current Training Program</div><div class="file-desc">Active split, exercises, sets/reps, progression scheme</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Current Nutrition Protocol</div><div class="file-desc">Calorie targets, carb cycling days, food list</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Live Hard Phase + Rules</div><div class="file-desc">Current phase, daily task list, progress log</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── CONTENT ── -->
+    <div class="proj-panel" id="pc-content">
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label purple">// PROJECT INSTRUCTIONS — paste into Claude Project</span></div>
+        <div class="setup-block-body">
+          <div class="system-prompt-box" id="sp-content">You are JT — the personal content strategist and brand-building assistant for Jeremy (JT), a faith-fitness-entrepreneurship creator.
+
+PERSONAL BRAND CONTEXT:
+- Jeremy is enrolled in Alex Eubank's creator pathway
+- Bodybuilding is the primary content engine that unifies all pillars into one brand
+- Brand pillars: faith, fitness (bodybuilding), ministry lifestyle, Iron Oath Brotherhood, entrepreneurship
+- Target audience: young Christian men, driven professionals, faith-fitness crossover audience
+- Platforms: Instagram (primary), YouTube (secondary), potentially TikTok
+- Growth target: 5,000–10,000 engaged followers in the near term
+- Content goal: build an audience that naturally converts into Iron Oath, JTrainFit, and FCA partnership
+
+YOUR ROLE IN THIS PROJECT:
+- Content strategist — platform strategy, content pillars, posting cadence, growth tactics
+- Scriptwriter — YouTube scripts, Reels scripts, hook writing, storytelling frameworks
+- Caption writer — Instagram captions that convert, educate, and build community
+- Batch producer — produce 2–4 weeks of content in single sessions
+- Brand voice guardian — faith-forward, masculine, direct, zero fluff, aspirational but real
+- Analytics advisor — interpret what's working, what to double down on, what to cut
+
+CONTENT VOICE:
+- Tone: iron-sharpening-iron, no softness, faith-rooted, straight-talking
+- Never preachy, never performative — authenticity over polish
+- Mix of: transformation content, training footage, faith + fitness integration, behind-the-scenes of the mission
+- Alex Eubank influence: lifestyle-as-brand, physique as platform, community-first
+
+OPERATING PRINCIPLES:
+- Every piece of content should serve the larger mission — not just views
+- Quantity with quality: systems over inspiration, batch over trickle
+- Hook is everything — spend as much time on the first 3 seconds as the rest
+- Always connect content back to a pillar: Iron Oath, JTrainFit, FCA, or bodybuilding journey<button class="copy-sp-btn" onclick="copySP('sp-content',this)">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label purple">// Power Prompts for this Project</span></div>
+        <div class="setup-block-body" style="padding:0">
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Batch 4 weeks of Instagram content. Mix: training, faith, Iron Oath tease, lifestyle. Format: hook + body + CTA."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Write a YouTube script: [topic]. Hook in first 15 sec. 7–10 min. Angle: bodybuilding meets faith/brotherhood."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Give me 20 hook options for a Reel about [topic]. Grab in 3 seconds. No fluff, no questions as hooks."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Build my content pillars and a 30-day posting calendar. 5 pillars, 1 post/day, rotate systematically."</span><button class="pr-copy">COPY</button></div>
+          <div class="prompt-row" onclick="copyPR(this)"><span class="prompt-row-text">"Audit my brand voice. Here's a recent caption: [paste]. What's working, what's off, how to sharpen it?"</span><button class="pr-copy">COPY</button></div>
+        </div>
+      </div>
+      <div class="setup-block">
+        <div class="setup-block-header"><span class="setup-block-label purple">// Recommended Files to Upload</span></div>
+        <div class="setup-block-body">
+          <div class="file-list">
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Brand Voice Guide</div><div class="file-desc">Tone, vocabulary, what to avoid, examples of on-brand posts</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Content Pillars Doc</div><div class="file-desc">5 pillars defined with examples and purpose</div></div></div>
+            <div class="file-item"><span class="file-icon">DOC</span><div><div class="file-name">Top Performing Posts</div><div class="file-desc">Captions/scripts that hit — JT can reverse-engineer the pattern</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /tab-projects -->
+
+  <div class="footer">
+    <span class="ftxt">JT COMMAND HUB <b>v1.0</b> // MAY 2026</span>
+    <span class="ftxt">5 PROJECTS // IRON OATH // FCA // JTRAINFIT // BODYBUILDING // BRAND</span>
+  </div>
+
+</div><!-- /main -->
+</div><!-- /app -->
+
+<script>
+// Main tabs
+document.getElementById('nav').addEventListener('click', e => {
+  const btn = e.target.closest('.ntab');
+  if (!btn) return;
+  document.querySelectorAll('.ntab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+});
+
+// Project sub-tabs
+document.getElementById('proj-nav').addEventListener('click', e => {
+  const btn = e.target.closest('.ptab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.ptab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.proj-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('pc-' + btn.dataset.pc).classList.add('active');
+});
+
+// Copy system prompt
+function copySP(id, btn) {
+  const box = document.getElementById(id);
+  const text = box.innerText.replace('COPY','').replace('COPIED ✓','').trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2500);
+  });
+}
+
+// Copy prompt row
+function copyPR(row) {
+  const text = row.querySelector('.prompt-row-text').textContent.trim();
+  const btn = row.querySelector('.pr-copy');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'COPIED ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+</script>
+</body>
+</html>
