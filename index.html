@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JTrainFit // Enlist</title>
-<meta name="description" content="Join the JTrainFit ecosystem. Evidence-based training, real accountability. No fluff.">
+<title>JT // Early Access</title>
+<meta name="description" content="Early access to what Jeremy Womack is building — training, mindset, and character development for coaches and athletes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -37,12 +37,8 @@
     overflow-x: hidden;
   }
 
-  /* hex grid backdrop */
   .hexfield {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    opacity: 0.35;
+    position: fixed; inset: 0; z-index: 0; opacity: 0.35;
     background-image:
       linear-gradient(30deg, var(--line) 1px, transparent 1px),
       linear-gradient(150deg, var(--line) 1px, transparent 1px),
@@ -51,31 +47,15 @@
     mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 85%);
   }
 
-  /* smoke / ember drift */
-  .drift {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
+  .drift { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 
   .plume {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.5;
-    mix-blend-mode: screen;
-    animation: rise linear infinite;
+    position: absolute; border-radius: 50%; filter: blur(60px);
+    opacity: 0.5; mix-blend-mode: screen; animation: rise linear infinite;
   }
 
-  .plume.smoke {
-    background: radial-gradient(circle, rgba(120,124,128,0.35), transparent 70%);
-  }
-
-  .plume.fire {
-    background: radial-gradient(circle, rgba(255,77,28,0.4), transparent 70%);
-  }
+  .plume.smoke { background: radial-gradient(circle, rgba(120,124,128,0.35), transparent 70%); }
+  .plume.fire { background: radial-gradient(circle, rgba(255,77,28,0.4), transparent 70%); }
 
   .p1 { width: 340px; height: 340px; left: -60px; bottom: -100px; animation-duration: 22s; }
   .p2 { width: 260px; height: 260px; right: -40px; bottom: -80px; animation-duration: 28s; animation-delay: -6s; }
@@ -87,188 +67,141 @@
     100% { transform: translateY(-70vh) translateX(30px) scale(1.3); opacity: 0; }
   }
 
-  /* scanline */
   .scan {
-    position: fixed;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.02) 0px,
-      rgba(255,255,255,0.02) 1px,
-      transparent 1px,
-      transparent 3px
-    );
+    position: fixed; inset: 0; z-index: 2; pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
     opacity: 0.5;
   }
 
   .frame {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 480px;
+    position: relative; z-index: 1; width: 100%; max-width: 500px;
     background: linear-gradient(180deg, var(--panel), var(--panel-2));
     border: 1px solid var(--line);
     padding: 34px 26px;
   }
 
-  .corner {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--ember);
-  }
+  .corner { position: absolute; width: 18px; height: 18px; border: 2px solid var(--ember); }
   .corner.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
   .corner.tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
   .corner.bl { bottom: -1px; left: -1px; border-right: none; border-top: none; }
   .corner.br { bottom: -1px; right: -1px; border-left: none; border-top: none; }
 
   .hud-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    color: var(--ash);
-    margin-bottom: 22px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Share Tech Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.08em; color: var(--ash); margin-bottom: 20px;
   }
 
   .hud-row .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ok);
-    display: inline-block;
-    margin-right: 6px;
-    box-shadow: 0 0 6px var(--ok);
+    width: 6px; height: 6px; border-radius: 50%; background: var(--ok);
+    display: inline-block; margin-right: 6px; box-shadow: 0 0 6px var(--ok);
   }
 
   .photo-frame {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16/10;
-    overflow: hidden;
-    border: 1px solid var(--line);
-    margin-bottom: 22px;
+    position: relative; width: 100%; aspect-ratio: 16/10; overflow: hidden;
+    border: 1px solid var(--line); margin-bottom: 16px;
   }
 
   .photo-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 20%;
+    width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
     filter: grayscale(0.25) contrast(1.15) brightness(0.85);
   }
 
   .photo-frame::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content: ""; position: absolute; inset: 0;
     background: linear-gradient(180deg, rgba(8,9,10,0) 40%, rgba(8,9,10,0.9) 100%),
                 linear-gradient(90deg, rgba(255,77,28,0.12), transparent 60%);
   }
 
   .photo-tag {
-    position: absolute;
-    bottom: 10px;
-    left: 12px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    color: var(--ember);
-    z-index: 1;
+    position: absolute; bottom: 10px; left: 12px;
+    font-family: 'Share Tech Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.08em; color: var(--ember); z-index: 1;
   }
+
+  .badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+
+  .badge {
+    font-family: 'Share Tech Mono', monospace; font-size: 10px;
+    letter-spacing: 0.05em; color: var(--ash); border: 1px solid var(--line);
+    padding: 5px 9px; background: rgba(255,255,255,0.02);
+  }
+
+  .badge .ok-dot { color: var(--ember); margin-right: 5px; }
 
   h1 {
     font-family: 'Black Ops One', sans-serif;
-    font-size: clamp(30px, 7vw, 40px);
-    line-height: 1.05;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 14px;
+    font-size: clamp(28px, 6.5vw, 38px);
+    line-height: 1.08; text-transform: uppercase; color: var(--white);
+    margin-bottom: 10px;
     text-shadow: 0 0 18px rgba(255,77,28,0.25);
   }
 
   h1 .em { color: var(--ember); }
 
-  .directives {
-    list-style: none;
-    margin-bottom: 26px;
+  .what-is-this {
+    font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 15px;
+    color: var(--white); line-height: 1.55;
+    border-left: 2px solid var(--ember);
+    background: rgba(255,77,28,0.06);
+    padding: 12px 14px;
+    margin-bottom: 16px;
   }
 
-  .directives li {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    letter-spacing: 0.01em;
-    color: var(--white);
-    padding-left: 20px;
-    position: relative;
-    margin-bottom: 9px;
-  }
-
-  .directives li::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
+  .what-is-this strong {
     color: var(--ember);
     font-weight: 700;
   }
 
-  form {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 14px;
+  .lede {
+    font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 15.5px;
+    color: var(--ash); margin-bottom: 22px; line-height: 1.5;
   }
 
-  input[type="email"] {
-    flex: 1;
-    min-width: 0;
-    background: var(--black);
-    border: 1px solid var(--line);
-    color: var(--white);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 14px;
-    padding: 16px 16px;
-    outline: none;
-    transition: border-color 0.2s ease;
+  .directives { list-style: none; margin-bottom: 26px; }
+
+  .directives li {
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15.5px;
+    color: var(--white); padding-left: 20px; position: relative; margin-bottom: 10px;
   }
 
-  input[type="email"]::placeholder { color: #4d5155; }
-  input[type="email"]:focus { border-color: var(--ember-dim); }
+  .directives li::before {
+    content: "▸"; position: absolute; left: 0; color: var(--ember); font-weight: 700;
+  }
+
+  .directives li span.desc {
+    font-weight: 500; color: var(--ash);
+  }
+
+  form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+
+  .name-email-row { display: flex; gap: 8px; }
+
+  input[type="text"], input[type="email"] {
+    flex: 1; min-width: 0; background: var(--black); border: 1px solid var(--line);
+    color: var(--white); font-family: 'Share Tech Mono', monospace; font-size: 13.5px;
+    padding: 15px 14px; outline: none; transition: border-color 0.2s ease;
+  }
+
+  input::placeholder { color: #4d5155; }
+  input:focus { border-color: var(--ember-dim); }
 
   button {
-    background: var(--ember);
-    color: #1a0a04;
-    border: none;
-    font-family: 'Black Ops One', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    padding: 16px 22px;
-    cursor: pointer;
-    white-space: nowrap;
+    background: var(--ember); color: #1a0a04; border: none;
+    font-family: 'Black Ops One', sans-serif; font-size: 12.5px; letter-spacing: 0.04em;
+    padding: 16px 20px; cursor: pointer; white-space: nowrap;
     transition: background 0.15s ease, transform 0.1s ease;
     clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
   }
 
   button:hover { background: #ff6a3c; }
   button:active { transform: scale(0.97); }
-
-  button:focus-visible, input:focus-visible {
-    outline: 2px solid var(--ember);
-    outline-offset: 2px;
-  }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
 
   .talk-first {
-    display: block;
-    text-align: center;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11.5px;
-    color: var(--ash);
-    text-decoration: none;
-    letter-spacing: 0.03em;
+    display: block; text-align: center; font-family: 'Share Tech Mono', monospace;
+    font-size: 11.5px; color: var(--ash); text-decoration: none; letter-spacing: 0.03em;
+    margin-top: 4px;
   }
 
   .talk-first:hover { color: var(--ember); }
@@ -277,62 +210,35 @@
   .success.show { display: block; }
 
   .success .status {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--ok);
-    margin-bottom: 10px;
+    font-family: 'Share Tech Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; color: var(--ok); margin-bottom: 10px;
   }
 
   .success h2 {
-    font-family: 'Black Ops One', sans-serif;
-    font-size: 26px;
-    text-transform: uppercase;
-    color: var(--white);
-    margin-bottom: 10px;
+    font-family: 'Black Ops One', sans-serif; font-size: 26px;
+    text-transform: uppercase; color: var(--white); margin-bottom: 10px;
   }
 
-  .success > p.sub {
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 600;
-    font-size: 15px;
-    color: var(--ash);
-    margin-bottom: 4px;
+  .success p {
+    font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 15px;
+    color: var(--ash); margin-bottom: 6px; line-height: 1.5;
   }
 
   #my-cal-inline {
-    width: 100%;
-    min-width: 280px;
-    height: 640px;
-    margin-top: 20px;
-    overflow: scroll;
-    border: 1px solid var(--line);
+    width: 100%; min-width: 280px; height: 620px; margin-top: 18px;
+    overflow: scroll; border: 1px solid var(--line);
   }
 
-  .cal-fallback {
-    margin-top: 14px;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 11px;
-  }
-
-  .cal-fallback a {
-    color: var(--ash);
-    border-bottom: 1px solid rgba(125,130,136,0.35);
-    padding-bottom: 2px;
-    text-decoration: none;
-  }
+  .cal-fallback { margin-top: 12px; font-family: 'Share Tech Mono', monospace; font-size: 11px; }
+  .cal-fallback a { color: var(--ash); border-bottom: 1px solid rgba(125,130,136,0.35); padding-bottom: 2px; text-decoration: none; }
 
   .fine {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    color: #4d5155;
-    text-align: center;
-    margin-top: 18px;
+    font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 0.05em;
+    color: #4d5155; text-align: center; margin-top: 18px;
   }
 
   @media (max-width: 420px) {
-    form { flex-direction: column; }
+    .name-email-row { flex-direction: column; }
     button { width: 100%; justify-content: center; display: flex; align-items: center; }
   }
 </style>
@@ -355,7 +261,7 @@
 
   <div class="hud-row">
     <span><span class="dot"></span>SYSTEM ONLINE</span>
-    <span>JTF-ECOSYSTEM // ACCESS</span>
+    <span>JTRAINFIT // PRE-LAUNCH</span>
   </div>
 
   <div class="photo-frame">
@@ -363,25 +269,42 @@
     <div class="photo-tag">JEREMY WOMACK // JTRAINFIT</div>
   </div>
 
-  <h1>Join the <span class="em">Ecosystem.</span></h1>
+  <div class="badges">
+    <span class="badge"><span class="ok-dot">■</span>NASM-CERTIFIED PERFORMANCE COACH</span>
+    <span class="badge"><span class="ok-dot">■</span>ELITE NATURAL BODYBUILDER — PRO CARD PURSUIT</span>
+    <span class="badge"><span class="ok-dot">■</span>CHARACTER & LEADERSHIP COACH — COACHES & ATHLETES</span>
+  </div>
+
+  <h1>Get In <span class="em">Before It's Public.</span></h1>
+
+  <div class="what-is-this">
+    This is for anyone who wants to <strong>work with me in some way</strong> — coaching, content, whatever comes next — or just wants to be <strong>the first to know</strong> when I drop something new: content, tools, freebies, all of it.
+  </div>
+
+  <p class="lede">First up — training systems, mental performance, and character development. Built from real results, not theory.</p>
 
   <ul class="directives">
-    <li>Evidence-based training. No guessing.</li>
-    <li>Real coaching. Real accountability.</li>
-    <li>Built for driven professionals — not hobbyists.</li>
+    <li>Physical <span class="desc">— training systems built on elite-level results</span></li>
+    <li>Mental <span class="desc">— performance and discipline that actually holds up</span></li>
+    <li>Spiritual <span class="desc">— character and leadership, not slogans</span></li>
   </ul>
 
   <form id="commitForm">
-    <input type="email" id="email" name="email" placeholder="ENTER EMAIL" required autocomplete="email">
-    <button type="submit" id="submitBtn">ENLIST</button>
+    <div class="name-email-row">
+      <input type="text" id="fname" name="name" placeholder="FIRST NAME" required autocomplete="given-name">
+    </div>
+    <div class="name-email-row">
+      <input type="email" id="email" name="email" placeholder="ENTER EMAIL" required autocomplete="email">
+      <button type="submit" id="submitBtn">REQUEST ACCESS</button>
+    </div>
   </form>
-
-  <a href="https://cal.com/jeremywomack/15min" target="_blank" rel="noopener" class="talk-first">SKIP THE LINE // TALK FIRST →</a>
+  <a href="https://cal.com/jeremywomack/15min" target="_blank" rel="noopener" class="talk-first">PREFER TO TALK FIRST? BOOK 15 MIN →</a>
 
   <div class="success" id="successBlock">
     <div class="status">ACCESS GRANTED</div>
-    <h2>You're In.</h2>
-    <p class="sub">Lock your first session. Pick a slot:</p>
+    <h2>You're On The List.</h2>
+    <p>You're in early — before any of this is public. Whether it's working together down the line or just being first to know when something drops, this is where it starts.</p>
+    <p>Want to connect directly? Grab 15 minutes:</p>
     <div id="my-cal-inline"></div>
     <p class="cal-fallback"><a href="https://cal.com/jeremywomack/15min" target="_blank" rel="noopener">Calendar not loading? Open booking page directly →</a></p>
   </div>
@@ -429,7 +352,11 @@
   });
 
   // ---------------------------------------------------------------
-  // LEAD CAPTURE — wired to Systeme.io (JTrainFit CRM)
+  // LEAD CAPTURE — wired to Systeme.io
+  // NOTE: field name for first name is set to "name" below, the
+  // common Systeme.io convention. If it doesn't show up correctly
+  // in your Contacts after testing, check your Systeme.io form's
+  // exact field name and tell me — it's a one-line fix.
   // ---------------------------------------------------------------
   const SYSTEME_ENDPOINT = "https://systeme.io/embedded/44388710/subscription";
 
@@ -438,6 +365,7 @@
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    const name = document.getElementById('fname').value.trim();
     const email = document.getElementById('email').value.trim();
     if (!email) return;
 
@@ -450,13 +378,13 @@
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ email: email })
+        body: new URLSearchParams({ email: email, name: name })
       });
       form.style.display = 'none';
       document.querySelector('.talk-first').style.display = 'none';
       successBlock.classList.add('show');
     } catch (err) {
-      btn.textContent = 'ENLIST';
+      btn.textContent = 'REQUEST ACCESS';
       btn.disabled = false;
       alert('Something went wrong — try again in a second.');
     }
