@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>JT // Early Access</title>
 <meta name="description" content="Early access to what Jeremy Womack is building — training, mindset, and character development for coaches and athletes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,11 +28,11 @@
     background: var(--black);
     color: var(--white);
     font-family: 'Rajdhani', sans-serif;
-    min-height: 100svh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 32px 18px;
+    padding: max(32px, env(safe-area-inset-top)) max(18px, env(safe-area-inset-right)) max(32px, env(safe-area-inset-bottom)) max(18px, env(safe-area-inset-left));
     position: relative;
     overflow-x: hidden;
   }
@@ -80,6 +80,10 @@
     padding: 34px 26px;
   }
 
+  @media (max-width: 480px) {
+    .frame { padding: 26px 18px; }
+  }
+
   .corner { position: absolute; width: 18px; height: 18px; border: 2px solid var(--ember); }
   .corner.tl { top: -1px; left: -1px; border-right: none; border-bottom: none; }
   .corner.tr { top: -1px; right: -1px; border-left: none; border-bottom: none; }
@@ -125,6 +129,7 @@
     font-family: 'Share Tech Mono', monospace; font-size: 10px;
     letter-spacing: 0.05em; color: var(--ash); border: 1px solid var(--line);
     padding: 5px 9px; background: rgba(255,255,255,0.02);
+    max-width: 100%; overflow-wrap: break-word;
   }
 
   .badge .ok-dot { color: var(--ember); margin-right: 5px; }
@@ -179,8 +184,9 @@
 
   input[type="text"], input[type="email"] {
     flex: 1; min-width: 0; background: var(--black); border: 1px solid var(--line);
-    color: var(--white); font-family: 'Share Tech Mono', monospace; font-size: 13.5px;
+    color: var(--white); font-family: 'Share Tech Mono', monospace; font-size: 16px;
     padding: 15px 14px; outline: none; transition: border-color 0.2s ease;
+    -webkit-appearance: none; appearance: none; border-radius: 0;
   }
 
   input::placeholder { color: #4d5155; }
@@ -237,7 +243,7 @@
     color: #4d5155; text-align: center; margin-top: 18px;
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 480px) {
     .name-email-row { flex-direction: column; }
     button { width: 100%; justify-content: center; display: flex; align-items: center; }
   }
@@ -378,7 +384,7 @@
         method: 'POST',
         mode: 'no-cors',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ email: email, name: name })
+        body: new URLSearchParams({ email: email, first_name: name })
       });
       form.style.display = 'none';
       document.querySelector('.talk-first').style.display = 'none';
