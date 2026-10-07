@@ -1,2 +1,0 @@
-# jtrainfit-website
-jtrainfit CTA
