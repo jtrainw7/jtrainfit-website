@@ -3,18 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JTrainFit | Build the body. Become the man.</title>
-<meta name="description" content="12-week online physique transformation coaching for men who are tired of starting over. Coached by Jeremy Womack, natural bodybuilding overall champion.">
-<meta property="og:title" content="JTrainFit | Build the body. Become the man.">
-<meta property="og:description" content="12-week online physique transformation coaching for men. Apply to work with Jeremy Womack.">
+<title>JTrainFit | You Were in Shape Once. Let's Get You Back.</title>
+<meta name="description" content="Personalized 12-week online coaching for men ready to rebuild their physique, confidence, and consistency. Coached by Jeremy Womack, competitive natural bodybuilder.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jtrainfit.com">
+<meta property="og:title" content="JTrainFit | You Were in Shape Once. Let's Get You Back.">
+<meta property="og:description" content="Personalized 12-week transformation coaching for men ready to make their comeback. Apply for 1:1 coaching.">
 <meta property="og:image" content="https://jtrainfit.com/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#17191B">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --charcoal:#17191B; --ink:#101214; --ivory:#F3F0E8; --bronze:#B58A45; --crimson:#A8202D; --slate:#73777A;
+  --charcoal:#17191B; --ink:#101214; --ivory:#F3F0E8; --bronze:#B58A45; --crimson:#A8202D; --slate:#8A8E91;
   --line:rgba(243,240,232,.14);
   --display:'Anton','Arial Narrow',Impact,sans-serif;
   --body:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
@@ -22,278 +25,300 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--charcoal);color:var(--ivory);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
+body{background:var(--charcoal);color:var(--ivory);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 var(--pad)}
-section{padding:clamp(64px,10vw,120px) 0}
-h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:.98;letter-spacing:.005em}
-h1{font-size:clamp(3.4rem,15vw,8.5rem)}
-h2{font-size:clamp(2.4rem,8vw,4.6rem);margin-bottom:.5em}
-p{max-width:60ch}
-.muted{color:var(--slate)}
-
-/* scroll bar */
-#bar{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--bronze);transform-origin:left;transform:scaleX(0);z-index:50}
+section{padding:clamp(72px,11vw,128px) 0}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-transform:uppercase;line-height:1;letter-spacing:.005em}
+h2{font-size:clamp(2.3rem,7.4vw,4.4rem);margin-bottom:.55em}
+p{max-width:58ch}
+.eyebrow{font:600 .78rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--bronze);margin-bottom:18px;display:block}
 
 /* header */
-header{position:fixed;top:3px;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);background:linear-gradient(var(--charcoal),rgba(23,25,27,0))}
-.logo{font-family:var(--display);font-size:1.5rem;text-decoration:none;letter-spacing:.04em}
-.btn{display:inline-block;font:600 .95rem/1 var(--body);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:16px 26px;background:var(--crimson);color:var(--ivory);border:0;cursor:pointer;transition:background .2s}
-.btn:hover{background:#c02636}
-.btn.sm{padding:11px 16px;font-size:.8rem}
-.btn.ghost{background:transparent;border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--bronze);background:transparent}
+header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);background:linear-gradient(var(--charcoal),rgba(23,25,27,0));pointer-events:none}
+header>*{pointer-events:auto}
+.logo{font-family:var(--display);font-size:1.5rem;text-decoration:none;letter-spacing:.05em}
+.btn{display:inline-block;font:600 .95rem/1 var(--body);letter-spacing:.07em;text-transform:uppercase;text-decoration:none;padding:18px 28px;min-height:52px;background:var(--crimson);color:var(--ivory);border:0;cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:#c02636;transform:translateY(-1px)}
+.btn.sm{padding:12px 16px;min-height:44px;font-size:.78rem}
+.btn.big{padding:22px 34px;font-size:1.02rem}
 
-/* hero */
-.hero{min-height:100svh;display:flex;align-items:flex-end;position:relative;padding:120px 0 56px;overflow:hidden}
-.hero .photo{position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 20%,#2a2d30,var(--ink));}
-.hero .photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
-.hero .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--charcoal) 8%,rgba(23,25,27,.55) 50%,rgba(23,25,27,.15))}
-.hero .wrap{position:relative;z-index:2}
-.hero p.sub{margin:28px 0 32px;font-size:clamp(1.05rem,2.6vw,1.3rem);color:rgba(243,240,232,.88)}
-.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+/* 1 hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:96px 0 48px;position:relative;overflow:hidden;background:radial-gradient(90% 70% at 80% 30%,#25282b,var(--ink))}
+.hero .wrap{display:grid;gap:36px;width:100%}
+@media(min-width:900px){.hero .wrap{grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}}
+.hero .wrap.nophoto{grid-template-columns:1fr}
+.hero h1{font-size:clamp(2.9rem,12.5vw,5.8rem);line-height:.96}
+.hero h1 em{font-style:normal;color:var(--bronze)}
+.hero .sub{margin:24px 0 30px;font-size:clamp(1.05rem,2.5vw,1.25rem);color:rgba(243,240,232,.88)}
+.cred{margin-top:26px;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--slate)}
+.hero-photo{position:relative;aspect-ratio:3/4;width:min(100%,calc(40svh*.75));margin:0 auto;overflow:hidden;border:1px solid var(--line);order:-1}
+@media(min-width:900px){.hero-photo{order:0;width:100%;max-width:440px;margin:0 0 0 auto}}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center;will-change:transform}
 
-/* proof */
+/* 2 comeback */
+.comeback{background:var(--ivory);color:var(--charcoal)}
+.comeback .eyebrow{color:var(--crimson)}
+.comeback h2{max-width:14ch}
+.comeback p{font-size:1.12rem;margin-bottom:1.1em}
+.comeback p.strong{font-weight:600}
+.three{display:grid;gap:0;margin:44px 0 40px;border-top:2px solid var(--charcoal)}
+@media(min-width:760px){.three{grid-template-columns:repeat(3,1fr);column-gap:40px}}
+.three div{padding:20px 0;border-bottom:1px solid rgba(23,25,27,.18)}
+@media(min-width:760px){.three div{border-bottom:0;padding:24px 0 0}}
+.three h3{font-size:clamp(1.5rem,3.6vw,2rem);color:var(--charcoal)}
+.three h3::before{content:"";display:block;width:34px;height:3px;background:var(--bronze);margin-bottom:14px}
+.btn.dark{background:var(--charcoal)}
+.btn.dark:hover{background:#000}
+
+/* 3 proof */
 .proof{background:var(--ink)}
-.grid2{display:grid;gap:40px}
-@media(min-width:860px){.grid2{grid-template-columns:1fr 1fr;gap:72px;align-items:center}}
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.ph{position:relative;aspect-ratio:4/5;background:linear-gradient(160deg,#25282b,#15171a);overflow:hidden}
-.ph img{width:100%;height:100%;object-fit:cover}
-.ph span{position:absolute;left:10px;bottom:10px;font-size:.78rem;background:rgba(16,18,20,.8);padding:4px 9px;color:var(--ivory)}
-.timeline{margin:36px 0 28px;border-top:1px solid var(--line);padding-top:18px}
+.proof .head{max-width:760px;margin-bottom:44px}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:56px}
+.gallery .ph{background:none;overflow:visible}
+.gallery .ph img{aspect-ratio:3/4;height:auto;object-fit:cover}
+.gallery .ph span{position:static;display:block;background:none;padding:8px 0 0;font-size:.8rem;color:var(--slate)}
+@media(min-width:760px){.gallery{grid-template-columns:repeat(4,1fr);gap:10px}}
+.ph{position:relative;overflow:hidden;background:linear-gradient(160deg,#25282b,#15171a)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.ph span{position:absolute;left:10px;bottom:10px;font-size:.76rem;background:rgba(16,18,20,.82);padding:4px 9px}
+.grid2{display:grid;gap:44px}
+@media(min-width:860px){.grid2{grid-template-columns:1fr 1fr;gap:80px;align-items:start}}
+.founder{font-size:1.12rem;border-left:3px solid var(--bronze);padding-left:20px}
+.founder small{display:block;margin-top:14px;font-size:.84rem;color:var(--slate)}
+.timeline{margin:6px 0 26px}
 .track{height:6px;background:rgba(243,240,232,.12);position:relative}
 .fill{position:absolute;inset:0 auto 0 0;width:0;background:var(--bronze)}
-.readout{display:flex;justify-content:space-between;margin-top:10px;font-size:.9rem;color:var(--slate)}
+.readout{display:flex;justify-content:space-between;margin-top:10px;font-size:.88rem;color:var(--slate)}
 .readout b{color:var(--ivory);font-weight:600}
-.wins{list-style:none;margin:8px 0 24px;border-top:1px solid var(--line)}
-.wins li{padding:13px 0;border-bottom:1px solid var(--line)}
+.wins{list-style:none;border-top:1px solid var(--line);margin-bottom:22px}
+.wins li{padding:12px 0;border-bottom:1px solid var(--line)}
 .wins li.top{color:var(--bronze);font-weight:600}
-.pillars{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:6px;font-weight:500}
+.note{font-size:.88rem;color:var(--slate)}
+/* optional slot for verified client results: add <div class="clients">...</div> here when you have them */
 
-/* offer */
-.offer-list{list-style:none;margin:32px 0 36px;display:grid;gap:0;border-top:1px solid var(--line)}
-@media(min-width:760px){.offer-list{grid-template-columns:1fr 1fr;column-gap:56px}}
-.offer-list li{padding:16px 0;border-bottom:1px solid var(--line)}
-.offer-list strong{display:block;font-weight:600}
-.offer-list span{color:var(--slate);font-size:.95rem}
-.steps{display:grid;gap:18px;margin-top:44px;counter-reset:s}
-@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr);gap:40px}}
-.steps div{counter-increment:s;border-top:2px solid var(--bronze);padding-top:14px}
-.steps div::before{content:counter(s);font-family:var(--display);font-size:1.8rem;color:var(--bronze)}
-.steps strong{display:block;margin:2px 0 4px}
-.steps p{color:rgba(243,240,232,.75);font-size:.97rem}
+/* 4 offer */
+.offer .wrap{display:grid;gap:44px}
+@media(min-width:860px){.offer .wrap{grid-template-columns:1fr 1fr;gap:80px;align-items:start}}
+.offer .lead{font-size:1.12rem;margin-bottom:28px}
+.core{list-style:none;border-top:1px solid var(--line);margin-bottom:34px}
+.core li{padding:18px 0;border-bottom:1px solid var(--line)}
+.core strong{display:block;font-weight:600;font-size:1.05rem}
+.core span{color:var(--slate);font-size:.95rem}
+.fit{display:grid;gap:22px;margin-bottom:34px}
+.fit h3{font-size:1.25rem;margin-bottom:.5em;color:var(--bronze)}
+.fit ul{list-style:none;font-size:.97rem}
+.fit li{padding:6px 0;color:rgba(243,240,232,.82)}
+.steps{display:grid;gap:14px;margin-top:6px}
+.steps div{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;align-items:baseline;border-top:1px solid var(--line);padding-top:14px}
+.steps b{font-family:var(--display);font-weight:400;font-size:1.6rem;color:var(--bronze)}
+.steps p{color:rgba(243,240,232,.78);font-size:.97rem}
 
-/* for */
-.for{background:var(--ivory);color:var(--charcoal)}
-.for h2{color:var(--charcoal)}
-.for p{margin-bottom:1.1em;font-size:1.1rem}
-.for .fit{margin-top:36px;display:grid;gap:28px}
-@media(min-width:760px){.for .fit{grid-template-columns:1fr 1fr;gap:64px}}
-.for h3{font-size:1.6rem;margin-bottom:.5em;color:var(--crimson)}
-.for ul{list-style:none}
-.for li{padding:10px 0;border-bottom:1px solid rgba(23,25,27,.15)}
+/* 5 final */
+.final{background:var(--ink);text-align:center;border-top:1px solid var(--line)}
+.final .wrap{display:flex;flex-direction:column;align-items:center}
+.final h2{font-size:clamp(2.2rem,8.2vw,5.2rem);max-width:18ch;margin-bottom:.5em}
+.final p{margin-bottom:12px;color:rgba(243,240,232,.86);font-size:1.1rem}
+.final .btn{margin:22px 0 18px}
+.final small{color:var(--slate);font-size:.88rem;max-width:44ch}
 
-/* about */
-.about .ph{aspect-ratio:3/4}
-.about p{margin-bottom:1em}
-
-/* apply */
-.apply{background:var(--ink);text-align:left}
-.apply h2{font-size:clamp(2.8rem,10vw,6rem)}
-.apply p{margin-bottom:28px}
-.email{margin-top:64px;padding-top:32px;border-top:1px solid var(--line)}
-.email form{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;max-width:520px}
-.email input[type=email]{flex:1 1 220px;padding:15px 16px;background:transparent;border:1px solid var(--line);color:var(--ivory);font:inherit}
-.email input::placeholder{color:var(--slate)}
-.email .btn{background:transparent;border:1px solid var(--bronze);color:var(--ivory)}
-.email .btn:hover{background:var(--bronze);color:var(--charcoal)}
-.thanks{display:none;color:var(--bronze);margin-top:12px}
-footer{padding:36px 0;border-top:1px solid var(--line);color:var(--slate);font-size:.9rem}
+footer{padding:34px 0 40px;border-top:1px solid var(--line);color:var(--slate);font-size:.9rem}
 footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
 footer a{text-decoration:none}
 footer a:hover{color:var(--ivory)}
 
-/* page-load hero reveal (single moment) */
+/* mobile floating CTA */
+#float{position:fixed;left:0;right:0;bottom:0;z-index:45;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));background:linear-gradient(rgba(23,25,27,0),rgba(23,25,27,.96) 40%);transform:translateY(110%);transition:transform .35s ease;display:none}
+#float .btn{display:block;text-align:center;width:100%}
+#float.show{transform:none}
+@media(max-width:759px){#float{display:block}}
+
+/* motion: only when the visitor allows it */
 @media(prefers-reduced-motion:no-preference){
-  .hero h1,.hero p.sub,.hero .cta-row{opacity:0;transform:translateY(18px);animation:in .8s cubic-bezier(.2,.7,.2,1) forwards}
-  .hero p.sub{animation-delay:.15s}.hero .cta-row{animation-delay:.3s}
+  .hero h1,.hero .sub,.hero .btn,.hero .cred,.hero-photo{opacity:0;transform:translateY(18px);animation:in .8s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero .sub{animation-delay:.12s}.hero .btn{animation-delay:.24s}.hero .cred{animation-delay:.34s}.hero-photo{animation-delay:.1s}
   @keyframes in{to{opacity:1;transform:none}}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.on{opacity:1;transform:none}
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.ph img{transition:none}}
 </style>
 </head>
 <body>
-<div id="bar" aria-hidden="true"></div>
 
 <header>
-  <a class="logo" href="#top">JTRAINFIT</a>
-  <a class="btn sm" href="#apply" data-apply>Apply</a>
+  <a class="logo" href="#top" aria-label="JTrainFit home">JTRAINFIT</a>
+  <a class="btn sm" href="https://tally.so/r/ob4Zxx" data-apply>Apply</a>
 </header>
 
 <main id="top">
 
-<!-- HERO -->
+<!-- 1. HERO: Is this for me? -->
 <section class="hero">
-  <div class="photo"><img src="images/hero.jpg" alt="Jeremy Womack on stage at Battle of West Georgia 2026" onerror="this.remove()"></div>
   <div class="wrap">
-    <h1>Build the body.<br>Become the man.</h1>
-    <p class="sub">12-week online physique transformation for men who are tired of starting over. Personalized training, nutrition, and weekly accountability from a coach who self-coached his way to an overall bodybuilding title.</p>
-    <div class="cta-row">
-      <a class="btn" href="#apply" data-apply>Apply for coaching</a>
-      <a class="btn ghost" href="#proof">See my transformation</a>
+    <div>
+      <h1>You were in shape once. <em>Let's get you back.</em></h1>
+      <p class="sub">Rebuild your physique, confidence, and consistency with personalized 12-week coaching designed around your life today.</p>
+      <a class="btn big" href="https://tally.so/r/ob4Zxx" data-apply>Apply for 1:1 coaching &rarr;</a>
+      <p class="cred">Competitive Natural Bodybuilder &nbsp;|&nbsp; NASM Certified &nbsp;|&nbsp; Online Physique Coaching</p>
+    </div>
+    <div class="hero-photo" id="heroPhoto">
+      <img src="images/hero.jpg" alt="Jeremy Womack, founder of JTrainFit, on stage at Battle of West Georgia 2026" width="800" height="1000" fetchpriority="high" onerror="this.closest('.wrap').classList.add('nophoto');this.parentNode.remove()">
     </div>
   </div>
 </section>
 
-<!-- PROOF -->
+<!-- 2. THE COMEBACK: Does he understand my problem? -->
+<section class="comeback" id="comeback">
+  <div class="wrap">
+    <span class="eyebrow rv">The comeback</span>
+    <h2 class="rv">You haven't forgotten how to train. Life just got busier.</h2>
+    <p class="rv">You know what it feels like to be strong, confident, and consistent.</p>
+    <p class="rv">But somewhere between work, family, and everyday responsibilities, training stopped being a priority.</p>
+    <p class="rv strong">You don't need to start from zero. You need a plan that fits the life you're living now.</p>
+    <div class="three rv">
+      <div><h3>Rebuild your physique</h3></div>
+      <div><h3>Reclaim your confidence</h3></div>
+      <div><h3>Restore your consistency</h3></div>
+    </div>
+    <a class="btn dark rv" href="https://tally.so/r/ob4Zxx" data-apply>Make your comeback &rarr;</a>
+  </div>
+</section>
+
+<!-- 3. PROOF: Can I trust this coach? -->
 <section class="proof" id="proof">
-  <div class="wrap grid2">
-    <div class="ba">
-      <div class="ph"><img src="images/before.jpg" alt="Jeremy before prep, March 4" onerror="this.remove()"><span>March 4</span></div>
-      <div class="ph"><img src="images/after.jpg" alt="Jeremy on show day, September 19" onerror="this.remove()"><span>September 19</span></div>
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow rv">Proof</span>
+      <h2 class="rv">Built through discipline. Backed by experience.</h2>
     </div>
-    <div>
-      <h2>200 days. Self-coached.</h2>
-      <p>I ran my first show prep without a coach. I tracked, adjusted, missed sessions, fixed mistakes, and kept going. I used the same four principles I now coach: training, nutrition, accountability, consistency.</p>
-      <div class="timeline" aria-hidden="true">
-        <div class="track"><div class="fill" id="fill"></div></div>
-        <div class="readout"><span id="dayLabel"><b>Day 1</b> · Mar 4</span><span>Sep 19 · Day 200</span></div>
+
+    <div class="gallery rv">
+      <div class="ph"><img src="images/stage.jpg" alt="Jeremy Womack on stage at Battle of West Georgia 2026, front double biceps" loading="lazy" width="937" height="1250" onerror="this.parentNode.remove()"><span>Show day</span></div>
+      <div class="ph"><img src="images/stage2.jpg" alt="Jeremy Womack on stage at Battle of West Georgia 2026, full front view" loading="lazy" width="900" height="1200" onerror="this.parentNode.remove()"><span>Show day</span></div>
+      <div class="ph"><img src="images/before.jpg" alt="Jeremy before contest prep" loading="lazy" width="900" height="1200" onerror="this.parentNode.remove()"><span>Before prep</span></div>
+      <div class="ph"><img src="images/after.jpg" alt="Jeremy after 200 days of contest prep" loading="lazy" width="900" height="1200" onerror="this.parentNode.remove()"><span>After prep</span></div>
+    </div>
+
+    <div class="grid2">
+      <div class="rv">
+        <p class="founder">I'm Jeremy Womack, founder of JTrainFit. Bodybuilding taught me what consistent training, intentional nutrition, and accountability can accomplish. Now I help men who have fallen out of their routines rebuild their physiques with a realistic plan that fits their lives. Jesus Christ is the foundation of how I train, coach, and live. You don't need to share my faith to work with me.
+          <small>My results are evidence of my experience and dedication, not a promise that you will get identical results.</small>
+        </p>
       </div>
-      <p style="margin-bottom:8px">Battle of West Georgia 2026, my first show:</p>
-      <ul class="wins">
-        <li>Novice Men's Bodybuilding, Bantamweight</li>
-        <li>True Novice Men's Classic Physique</li>
-        <li>Men's Open Classic Physique</li>
-        <li class="top">Overall Champion, Novice Men's Bodybuilding</li>
+      <div class="rv">
+        <div class="timeline" aria-hidden="true">
+          <div class="track"><div class="fill" id="fill"></div></div>
+          <div class="readout"><span id="dayLabel"><b>Day 1</b> &middot; Mar 4</span><span>Sep 19 &middot; Day 200</span></div>
+        </div>
+        <p style="margin-bottom:10px">200 days, self-coached. Battle of West Georgia 2026, my first show:</p>
+        <ul class="wins">
+          <li>Novice Men's Bodybuilding, Bantamweight: 1st</li>
+          <li>True Novice Men's Classic Physique: 1st</li>
+          <li>Men's Open Classic Physique: 1st</li>
+          <li class="top">Overall Champion, Novice Men's Bodybuilding</li>
+        </ul>
+        <p class="note">12+ years of training experience. Contest prep is stage-specific; your plan is built for your life, not a stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. OFFER: Can this help me? -->
+<section class="offer" id="offer">
+  <div class="wrap">
+    <div class="rv">
+      <span class="eyebrow">The offer</span>
+      <h2>Your comeback starts here.</h2>
+      <p class="lead">The <strong>JTrainFit 12-Week Transformation</strong> is twelve weeks of personalized coaching to rebuild your physique, regain consistency, and build a routine you can keep. I take on a small number of men at a time so every check-in gets real attention.</p>
+      <a class="btn big" href="https://tally.so/r/ob4Zxx" data-apply>Apply for coaching &rarr;</a>
+    </div>
+    <div class="rv">
+      <ul class="core">
+        <li><strong>Personalized strength training</strong><span>Built for your schedule, equipment, and experience.</span></li>
+        <li><strong>Nutrition and macro guidance</strong><span>Targets set for your body and goal, then adjusted.</span></li>
+        <li><strong>Weekly accountability and progress reviews</strong><span>Honest check-ins that keep you moving.</span></li>
+        <li><strong>One-on-one coaching and adjustments</strong><span>Your plan changes when your results say it should.</span></li>
       </ul>
-      <p class="muted" style="font-size:.9rem">Contest prep is stage-specific. Your plan will be built for your life, not a stage.</p>
-    </div>
-  </div>
-</section>
-
-<!-- OFFER -->
-<section id="offer">
-  <div class="wrap">
-    <h2>JTrainFit 12-Week Transformation</h2>
-    <p>One program, built around you and checked every week. I take on a small number of men at a time so every check-in gets real attention.</p>
-    <ul class="offer-list">
-      <li><strong>Personalized training</strong><span>Built for your schedule, equipment, and experience.</span></li>
-      <li><strong>Personalized nutrition</strong><span>Macros set for your body and goal, then adjusted.</span></li>
-      <li><strong>Weekly check-ins</strong><span>Data, photos, and honest conversation.</span></li>
-      <li><strong>Progress tracking</strong><span>Measurements, photos, and performance logged in the app.</span></li>
-      <li><strong>Exercise demonstrations</strong><span>Video for every movement in your plan.</span></li>
-      <li><strong>Direct messaging</strong><span>Questions answered. Accountability when it counts.</span></li>
-      <li><strong>Program adjustments</strong><span>Training and nutrition change when your results say they should.</span></li>
-    </ul>
-    <a class="btn" href="#apply" data-apply>Apply for coaching</a>
-    <div class="steps">
-      <div><strong>Apply</strong><p>Tell me your goal and what's been in the way.</p></div>
-      <div><strong>Talk</strong><p>If it's a fit, you book a call and we map out the 12 weeks.</p></div>
-      <div><strong>Start</strong><p>Get onboarded and get your plan in the coaching app.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO IT'S FOR -->
-<section class="for">
-  <div class="wrap">
-    <h2>For men who are tired of starting over.</h2>
-    <p>You already know how to work hard. You've started the program, the cut, the new routine. Then life got busy, results stalled, and you started over.</p>
-    <p>What's missing isn't effort. It's a plan built for you, nutrition that makes sense, and someone checking your progress every week.</p>
-    <div class="fit">
-      <div>
-        <h3>This is for you if</h3>
-        <ul>
-          <li>You want to build muscle and lose fat</li>
-          <li>You're willing to follow a plan and report honestly</li>
-          <li>You're ready to invest in coaching</li>
-        </ul>
+      <div class="fit">
+        <div>
+          <h3>Built for you if</h3>
+          <ul><li>You've trained before and want to rebuild</li><li>You'll follow a plan and report honestly</li><li>You're ready to invest in coaching</li></ul>
+        </div>
+        <div>
+          <h3>Not for you if</h3>
+          <ul><li>You want a quick fix</li><li>You won't track food or training</li><li>You want a program without accountability</li></ul>
+        </div>
       </div>
-      <div>
-        <h3>This is not for you if</h3>
-        <ul>
-          <li>You want a quick fix</li>
-          <li>You won't track food or training</li>
-          <li>You want a program without accountability</li>
-        </ul>
+      <div class="steps">
+        <div><b>1</b><p><strong>Apply.</strong> Tell me your goal and what's been in the way.</p></div>
+        <div><b>2</b><p><strong>Talk.</strong> If it's a fit, book a 20 to 30 minute call.</p></div>
+        <div><b>3</b><p><strong>Start.</strong> Get onboarded and get your plan in the coaching app.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="wrap grid2">
-    <div class="ph"><img src="images/about.jpg" alt="Jeremy Womack" onerror="this.remove()"></div>
-    <div>
-      <h2>I'm Jeremy.</h2>
-      <p>I'm a NASM-certified trainer and natural bodybuilder. I built my first physique on my own, then won my first show. Coaching is how I help other men do the same, with a plan and someone in their corner.</p>
-      <p>Jesus Christ is the foundation of how I train, coach, and live. You don't need to share my faith to work with me. You do need to be serious.</p>
-    </div>
-  </div>
-</section>
-
-<!-- APPLY -->
-<section class="apply" id="apply">
+<!-- 5. FINAL CTA: What's my next step? -->
+<section class="final" id="apply">
   <div class="wrap">
-    <h2>Ready to stop starting over?</h2>
-    <p>Apply below. It takes about five minutes. If it looks like a fit, you'll get a link to book a call.</p>
-    <a class="btn" href="https://tally.so/r/ob4Zxx" data-apply>Apply for coaching</a>
-
-    <div class="email">
-      <p>Not ready to apply? Get updates and training notes.</p>
-      <form id="emailForm" action="https://formspree.io/f/mzdlvynp" method="POST">
-        <input type="email" name="email" placeholder="Your email" aria-label="Email address" required>
-        <button class="btn" type="submit">Subscribe</button>
-      </form>
-      <p class="thanks" id="thanks" role="status">Got it. You're on the list.</p>
-    </div>
+    <h2 class="rv">You know what it feels like to be in shape. It's time to get back there.</h2>
+    <p class="rv">Stop waiting for life to slow down.</p>
+    <p class="rv">Start building a physique and routine that work with the life you have now.</p>
+    <a class="btn big rv" href="https://tally.so/r/ob4Zxx" data-apply>Apply for your transformation &rarr;</a>
+    <small class="rv">Complete a short application and schedule a consultation to see if JTrainFit is the right fit.</small>
   </div>
 </section>
 </main>
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr">2026</span> JTrainFit</span>
-    <a href="https://www.instagram.com/jeremywomack_/" rel="noopener">Instagram</a>
-    <a href="mailto:jeremy@jtrainfit.com">jeremy@jtrainfit.com</a>
+    <span>JTrainFit LLC &copy; <span id="yr">2026</span></span>
+    <span><a href="mailto:jeremy@jtrainfit.com">Contact</a> &nbsp;&middot;&nbsp; <a href="https://www.instagram.com/jeremywomack_/" rel="noopener">Instagram</a></span>
   </div>
 </footer>
 
+<div id="float"><a class="btn" href="https://tally.so/r/ob4Zxx" data-apply>Apply for 1:1 coaching &rarr;</a></div>
+
 <script>
 (function(){
+  // One place to change the application link (Tally -> Cal.com redirect is set inside Tally).
   var APPLY_URL="https://tally.so/r/ob4Zxx";
-  // Header + CTA buttons: scroll to the apply section; the button inside it opens Tally.
-  document.querySelectorAll('[data-apply]').forEach(function(a){
-    if(a.closest('#apply')){a.setAttribute('href',APPLY_URL);a.setAttribute('target','_blank');a.setAttribute('rel','noopener');}
-  });
+  document.querySelectorAll('[data-apply]').forEach(function(a){a.setAttribute('href',APPLY_URL);});
   document.getElementById('yr').textContent=new Date().getFullYear();
 
-  var bar=document.getElementById('bar'),fill=document.getElementById('fill'),
-      label=document.getElementById('dayLabel'),proof=document.getElementById('proof');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll reveals
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window && !reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+  }else{rv.forEach(function(el){el.classList.add('on');});}
+
+  // Floating mobile CTA: shows after the hero, hides at the final CTA
+  var fl=document.getElementById('float'),hero=document.querySelector('.hero'),fin=document.getElementById('apply');
+  function floatTick(){
+    var hb=hero.getBoundingClientRect().bottom,fr=fin.getBoundingClientRect();
+    fl.classList.toggle('show',hb<0 && fr.top>innerHeight*0.6);
+  }
+
+  // Day 1 -> Day 200 timeline
+  var fill=document.getElementById('fill'),label=document.getElementById('dayLabel'),proof=document.getElementById('proof');
   var start=new Date(2026,2,4),months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function tick(){
-    var h=document.documentElement,max=h.scrollHeight-innerHeight;
-    bar.style.transform='scaleX('+(max>0?Math.min(1,scrollY/max):0)+')';
     var r=proof.getBoundingClientRect(),vh=innerHeight;
-    var p=Math.max(0,Math.min(1,(vh*0.85-r.top)/(r.height*0.7)));
+    var p=reduce?1:Math.max(0,Math.min(1,(vh*0.85-r.top)/(r.height*0.7)));
     var day=Math.max(1,Math.round(p*199)+1);
     fill.style.width=(p*100)+'%';
     var d=new Date(start);d.setDate(d.getDate()+day-1);
-    label.innerHTML='<b>Day '+day+'</b> · '+months[d.getMonth()]+' '+d.getDate();
+    label.innerHTML='<b>Day '+day+'</b> &middot; '+months[d.getMonth()]+' '+d.getDate();
+    floatTick();
   }
   addEventListener('scroll',tick,{passive:true});addEventListener('resize',tick);tick();
 
-  var f=document.getElementById('emailForm');
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
-      .then(function(r){if(r.ok){f.style.display='none';document.getElementById('thanks').style.display='block';}else{throw 0}})
-      .catch(function(){f.submit();});
-  });
 })();
 </script>
 </body>
